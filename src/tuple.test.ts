@@ -1,4 +1,4 @@
-import { Tuple, getTupleType, TupleTypes, createPoint, createVector } from "./tuple"
+import { Tuple, getTupleType, TupleTypes, createPoint, createVector, equalNumbers, equalTuples } from "./tuple"
 
 describe("tuple", () => {
     test("tuple should be a point", () => {
@@ -43,5 +43,33 @@ describe("tuple", () => {
         expect(vector.w).toEqual(0.0);
         expect(getTupleType(vector)).toEqual(TupleTypes.Vector);
         expect(getTupleType(vector)).not.toEqual(TupleTypes.Point);
+    })
+
+    test("numbers should be equal", () => {
+        const number1 = 1.564;
+        const number2 = 1.564;
+
+        expect(equalNumbers(number1, number2)).toBeTruthy();
+    })
+
+    test("numbers should not be equal", () => {
+        const number1 = 1.564;
+        const number2 = 2.129;
+
+        expect(equalNumbers(number1, number2)).toBeFalsy();
+    })
+
+    test("tuples should be equal", () => {
+        const tuple1: Tuple = { x: 1.132, y: 6.231, z: 2.234, w:1.0 }
+        const tuple2: Tuple = { x: 1.132, y: 6.231, z: 2.234, w:1.0 }
+
+        expect(equalTuples(tuple1, tuple2)).toBeTruthy();
+    })
+
+    test("tuples should not be equal", () => {
+        const tuple1: Tuple = { x: 1.132, y: 6.231, z: 2.234, w:1.0 }
+        const tuple2: Tuple = { x: 1.132, y: 6.231, z: 2.234, w:0.0 }
+
+        expect(equalTuples(tuple1, tuple2)).toBeFalsy();
     })
 })

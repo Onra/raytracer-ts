@@ -1,3 +1,5 @@
+const EPSILON = 0.00001;
+
 export enum TupleTypes { 
     Point = "POINT",
     Vector = "VECTOR"
@@ -20,4 +22,15 @@ export const createPoint = ( x: number, y: number, z: number): Tuple => {
 
 export const createVector = ( x: number, y: number, z: number): Tuple => {
     return { x, y, z, w: 0.0 }
+}
+
+export const equalNumbers = (number1: number, number2: number): boolean => {
+    return Math.abs(number1 - number2) < EPSILON;
+}
+
+export const equalTuples = (tuple1: Tuple, tuple2: Tuple): boolean => {
+   return equalNumbers(tuple1.x, tuple2.x) &&
+       equalNumbers(tuple1.y, tuple2.y) &&
+       equalNumbers(tuple1.z, tuple2.z) &&
+       equalNumbers(tuple1.w, tuple2.w);
 }
