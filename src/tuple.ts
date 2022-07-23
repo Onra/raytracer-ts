@@ -1,15 +1,15 @@
 const EPSILON = 0.00001;
 
 export enum TupleTypes { 
-    Point = "POINT",
-    Vector = "VECTOR"
+    Point = 1,
+    Vector = 0
 }
 
 export type Tuple = { 
     x: number,
     y: number,
     z: number,
-    w: number
+    w: TupleTypes
 }
 
 export const getTupleType = ( tuple: Tuple ): TupleTypes => {
@@ -41,4 +41,18 @@ export const addTuples = (tuple1: Tuple, tuple2: Tuple): Tuple => {
 
 export const subtractTuples = (tuple1: Tuple, tuple2: Tuple): Tuple => {
     return { x: tuple1.x - tuple2.x, y: tuple1.y - tuple2.y, z: tuple1.z - tuple2.z, w: tuple1.w - tuple2.w };
+}
+
+export const negateTuple = (tuple: Tuple): Tuple => {
+    const zeroTuple = { x: 0, y: 0, z: 0, w: TupleTypes.Vector };
+
+    return subtractTuples(zeroTuple, tuple);
+}
+
+export const multiplyTuple = (tuple: Tuple, scalar: number): Tuple => {
+    return { x: tuple.x * scalar, y: tuple.y * scalar, z: tuple.z * scalar, w: tuple.w * scalar };
+}
+
+export const divideTuple = (tuple: Tuple, scalar: number): Tuple => {
+    return { x: tuple.x / scalar, y: tuple.y / scalar, z: tuple.z / scalar, w: tuple.w / scalar };
 }
