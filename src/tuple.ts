@@ -9,7 +9,7 @@ export type Tuple = {
     x: number,
     y: number,
     z: number,
-    w: 0 | 1 
+    w: number
 }
 
 export const getTupleType = ( tuple: Tuple ): TupleTypes => {
@@ -33,4 +33,12 @@ export const equalTuples = (tuple1: Tuple, tuple2: Tuple): boolean => {
        equalNumbers(tuple1.y, tuple2.y) &&
        equalNumbers(tuple1.z, tuple2.z) &&
        equalNumbers(tuple1.w, tuple2.w);
+}
+
+export const addTuples = (tuple1: Tuple, tuple2: Tuple): Tuple => {
+    return { x: tuple1.x + tuple2.x, y: tuple1.y + tuple2.y, z: tuple1.z + tuple2.z, w: tuple1.w + tuple2.w };
+}
+
+export const subtractTuples = (tuple1: Tuple, tuple2: Tuple): Tuple => {
+    return { x: tuple1.x - tuple2.x, y: tuple1.y - tuple2.y, z: tuple1.z - tuple2.z, w: tuple1.w - tuple2.w };
 }

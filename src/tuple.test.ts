@@ -1,4 +1,4 @@
-import { Tuple, getTupleType, TupleTypes, createPoint, createVector, equalNumbers, equalTuples } from "./tuple"
+import { Tuple, getTupleType, TupleTypes, createPoint, createVector, equalNumbers, equalTuples, addTuples, subtractTuples } from "./tuple"
 
 describe("tuple", () => {
     test("tuple should be a point", () => {
@@ -71,5 +71,41 @@ describe("tuple", () => {
         const tuple2: Tuple = { x: 1.132, y: 6.231, z: 2.234, w:0.0 }
 
         expect(equalTuples(tuple1, tuple2)).toBeFalsy();
+    })
+
+    test("should add point and vector", () => {
+        const point: Tuple = { x: 1, y: 2, z: 3, w: 1 };
+        const vector: Tuple = { x: 2, y: 3, z: 4, w: 0 };
+
+        const expectedPoint: Tuple = { x: 3, y: 5, z: 7, w: 1 };
+
+        expect(addTuples(point, vector)).toEqual(expectedPoint);
+    })
+
+    test("should add two vectors", () => {
+        const vector1: Tuple = { x: 1, y: 2, z: 3, w: 0 };
+        const vector2: Tuple = { x: 2, y: 3, z: 4, w: 0 };
+
+        const expectedVector: Tuple = { x: 3, y: 5, z: 7, w: 0 };
+
+        expect(addTuples(vector1, vector2)).toEqual(expectedVector);
+    })
+
+    test("should subtract two points", () => {
+        const point1: Tuple = createPoint(1, 2, 3);
+        const point2: Tuple = createPoint(3, 5, 2);
+
+        const expectedVector: Tuple = { x: -2, y: -3, z: 1, w: 0 };
+
+        expect(subtractTuples(point1, point2)).toEqual(expectedVector);
+    })
+
+    test("should subtract a vector from a point", () => {
+        const point: Tuple = createPoint(1, 2, 3);
+        const vector: Tuple = createVector(3, 5, 2);
+
+        const expectedPoint: Tuple = { x: -2, y: -3, z: 1, w: 1 };
+
+        expect(subtractTuples(point, vector)).toEqual(expectedPoint);
     })
 })
