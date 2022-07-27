@@ -11,6 +11,10 @@ import {
   negateTuple,
   multiplyTuple,
   divideTuple,
+  getVectorMagnitude,
+  normalizeVector,
+  dotProduct,
+  crossProduct,
 } from "./tuple";
 
 describe("tuple", () => {
@@ -167,5 +171,67 @@ describe("tuple", () => {
     const expectedTuple: Tuple = { x: 1, y: -1.5, z: -1, w: 1 };
 
     expect(divideTuple(tuple, scalar)).toEqual(expectedTuple);
+  });
+
+  test("should return the magnitude of a vector", () => {
+    let vector = createVector(1, 0, 0);
+
+    expect(getVectorMagnitude(vector)).toEqual(1);
+
+    vector = createVector(0, 1, 0);
+
+    expect(getVectorMagnitude(vector)).toEqual(1);
+
+    vector = createVector(0, 0, 1);
+
+    expect(getVectorMagnitude(vector)).toEqual(1);
+
+    vector = createVector(1, 2, 3);
+
+    expect(getVectorMagnitude(vector)).toEqual(Math.sqrt(14));
+
+    vector = createVector(-1, -2, -3);
+
+    expect(getVectorMagnitude(vector)).toEqual(Math.sqrt(14));
+  });
+
+  test("should normalize a vector", () => {
+    let vector = createVector(4, 0, 0);
+
+    expect(
+      equalTuples(normalizeVector(vector), createVector(1, 0, 0))
+    ).toBeTruthy();
+
+    vector = createVector(1, 2, 3);
+
+    expect(
+      equalTuples(
+        normalizeVector(vector),
+        createVector(0.26726, 0.53452, 0.80178)
+      )
+    ).toBeTruthy();
+  });
+
+  test("normalized vector should have a magnitude of 1", () => {
+    const vector = createVector(1, 2, 3);
+
+    const normalizedVector = normalizeVector(vector);
+
+    expect(getVectorMagnitude(normalizedVector)).toEqual(1);
+  });
+
+  test("should return the dot product of two vectors", () => {
+    const vector1 = createVector(1, 2, 3);
+    const vector2 = createVector(2, 3, 4);
+
+    expect(dotProduct(vector1, vector2)).toEqual(20);
+  });
+
+  test("should do the cross product of two vectors", () => {
+    const vector1 = createVector(1, 2, 3);
+    const vector2 = createVector(2, 3, 4);
+
+    expect(crossProduct(vector1, vector2)).toEqual(createVector(-1, 2, -1));
+    expect(crossProduct(vector2, vector1)).toEqual(createVector(1, -2, 1));
   });
 });

@@ -78,3 +78,40 @@ export const divideTuple = (tuple: Tuple, scalar: number): Tuple => {
     w: tuple.w / scalar,
   };
 };
+
+export const getVectorMagnitude = (vector: Tuple): number => {
+  return Math.sqrt(
+    Math.pow(vector.x, 2) +
+      Math.pow(vector.y, 2) +
+      Math.pow(vector.z, 2) +
+      Math.pow(vector.w, 2)
+  );
+};
+
+export const normalizeVector = (vector: Tuple): Tuple => {
+  const magnitude = getVectorMagnitude(vector);
+
+  return {
+    x: vector.x / magnitude,
+    y: vector.y / magnitude,
+    z: vector.z / magnitude,
+    w: vector.w / magnitude,
+  };
+};
+
+export const dotProduct = (tuple1: Tuple, tuple2: Tuple): number => {
+  return (
+    tuple1.x * tuple2.x +
+    tuple1.y * tuple2.y +
+    tuple1.z * tuple2.z +
+    tuple1.w * tuple2.w
+  );
+};
+
+export const crossProduct = (vector1: Tuple, vector2: Tuple): Tuple => {
+  return createVector(
+    vector1.y * vector2.z - vector1.z * vector2.y,
+    vector1.z * vector2.x - vector1.x * vector2.z,
+    vector1.x * vector2.y - vector1.y * vector2.x
+  );
+};
