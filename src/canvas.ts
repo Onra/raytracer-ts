@@ -21,3 +21,7 @@ export const createCanvas = (width: number, height: number): Canvas => {
 export const writePixel = (canvas: Canvas, x, y, color: Color) => {
   canvas.pixels[x][y] = color;
 };
+
+export const toPPMString = (canvas: Canvas): string => {
+  return `P3\r${canvas.width} ${canvas.height}\r255`;
+};

@@ -1,4 +1,4 @@
-import { Canvas, createCanvas, writePixel } from "./canvas";
+import { Canvas, createCanvas, writePixel, toPPMString } from "./canvas";
 import { createColor, equalColors, Color } from "./color";
 
 describe("Canvas", () => {
@@ -25,5 +25,13 @@ describe("Canvas", () => {
     writePixel(canvas, 2, 3, red);
 
     expect(equalColors(canvas.pixels[2][3], createColor(1, 0, 0))).toBeTruthy();
+  });
+
+  test("should generate PPM string from canvas", () => {
+    const canvas: Canvas = createCanvas(5, 3);
+
+    const ppm = toPPMString(canvas);
+
+    expect(ppm).toEqual("P3\r5 3\r255");
   });
 });
